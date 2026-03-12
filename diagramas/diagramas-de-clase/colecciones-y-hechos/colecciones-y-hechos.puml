@@ -1,0 +1,142 @@
+@startuml
+
+class Hecho {
+    - id: String
+    - titulo: String
+    - descripcion: String
+    - categoria: String
+    - latitud: float
+    - longitud: float
+    - fechaAcontecimiento: LocalDate
+    - fechaPublicacion: LocalDate
+    - origen: OrigenHecho
+    - eliminado: boolean
+    - etiquetas: List<Etiqueta>
+    - contenidosMultimedia: List<ContenidoMultimedia>
+    + getId(): String
+    + getTitulo(): String
+    + getDescripcion(): String
+    + getCategoria(): String
+    + getFechaAcontecimiento(): LocalDate
+    + setEliminado(boolean): void
+    + agregarEtiqueta(Etiqueta): void
+    + agregarContenido(ContenidoMultimedia): void
+}
+
+class Coleccion {
+    - titulo: String
+    - descripcion: String
+    - handle: String
+    - criterioPertenencia: Criterio
+    - fuente: FuenteDatos
+    - modoNavegacion: ModoNavegacion
+    - algoritmoConsenso: AlgoritmoConsenso
+    + Coleccion(titulo, descripcion, handle, criterio, fuente)
+    + Coleccion(titulo, descripcion, handle, criterio, fuente, algoritmo)
+    + obtenerHechos(): List<Hecho>
+    + setAlgoritmoConsensor(AlgoritmoConsenso): void
+    + setModoNavegacion(ModoNavegacion): void
+    + getHandle(): String
+    + getTitulo(): String
+}
+
+class Nodo {
+    - todasLasFuentes: List<FuenteDatos>
+    + registrarFuente(FuenteDatos): void
+    + obtenerTodasLasFuentes(): List<FuenteDatos>
+}
+
+interface AlgoritmoConsenso {
+    + cumple(Hecho): boolean
+    + recalcularConsenso(): void
+    + cacheEsValido(): boolean
+    + detener(): void
+}
+
+class ConsensoAbsoluta {
+    - nodo: Nodo
+    - cacheConsenso: Map<String, Boolean>
+    - cacheValido: boolean
+    + ConsensoAbsoluta(Nodo)
+    + cumple(Hecho): boolean
+    + recalcularConsenso(): void
+    + cacheEsValido(): boolean
+    + detener(): void
+}
+
+class ConsensoMayoriaSimple {
+    - nodo: Nodo
+    - cacheConsenso: Map<String, Boolean>
+    - cacheValido: boolean
+    + ConsensoMayoriaSimple(Nodo)
+    + cumple(Hecho): boolean
+    + recalcularConsenso(): void
+    + cacheEsValido(): boolean
+    + detener(): void
+    - calcularUmbralMayoria(int): int
+}
+
+class ConsensoMultiplesMenciones {
+    - nodo: Nodo
+    - cacheConsenso: Map<String, Boolean>
+    - cacheValido: boolean
+    + ConsensoMultiplesMenciones(Nodo)
+    + cumple(Hecho): boolean
+    + recalcularConsenso(): void
+    + cacheEsValido(): boolean
+    + detener(): void
+}
+
+
+
+class Agregador {
+    - fuentes: List<FuenteDatos>
+    - cacheLocal: List<Hecho>
+    - scheduler: ScheduledExecutorService
+    - periodoActualizacion: long
+    - unidadTiempo: TimeUnit
+    + obtenerHechos(): List<Hecho>
+    + obtenerHechosUnificados(): List<Hecho>
+    + agregarFuente(FuenteDatos): void
+    + quitarFuente(FuenteDatos): void
+    + getFuentes(): List<FuenteDatos>
+    + forzarActualizacion(): void
+    + configurarActualizacion(long, TimeUnit): void
+}
+
+interface FuenteDatos {
+    + obtenerHechos(): List<Hecho>
+}
+
+' Relaciones principales
+Coleccion *-- Hecho
+Hecho *-- OrigenHecho
+Hecho *-- Etiqueta
+Hecho *-- ContenidoMultimedia
+
+Coleccion *-- FuenteDatos
+Coleccion *-- Criterio
+Coleccion o-- AlgoritmoConsenso
+Coleccion *-- ModoNavegacion
+
+' Relaciones del Nodo
+Nodo  *--  FuenteDatos : contiene
+
+' Implementaciones de AlgoritmoConsenso
+AlgoritmoConsenso <|.. ConsensoAbsoluta
+AlgoritmoConsenso <|.. ConsensoMayoriaSimple
+AlgoritmoConsenso <|.. ConsensoMultiplesMenciones
+
+' Relaciones de consenso con Nodo
+ConsensoAbsoluta --> Nodo
+ConsensoMayoriaSimple --> Nodo
+ConsensoMultiplesMenciones --> Nodo
+
+' Agregador como FuenteDatos
+FuenteDatos <|.. Agregador
+Agregador o-- FuenteDatos
+
+
+
+
+@enduml

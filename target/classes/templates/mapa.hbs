@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mapa de Hechos - MetaMapa</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/templates/static/base.css">
+    <link rel="stylesheet" href="/templates/static/components.css">
+    <link rel="stylesheet" href="/templates/static/pages/mapa.css">
+</head>
+
+<body style="background: #f8f6f2; min-height: 100vh;">
+    
+    <!-- Include User Navbar -->
+    {{> navbar_user}}
+
+    <!-- Main Content -->
+    <div class="container-fluid py-5">
+        <h1 class="display-5 fw-bold mb-4" style="color: #333;">Mapa Interactivo de Hechos</h1>
+        <div class="filter-container glass-container">
+            <h5 class="card-title">Filtros Combinables</h5>
+            <div class="row g-3">
+                <div class="col-md-3">
+                    <label for="categoriaFiltro" class="form-label">Categoría:</label>
+                    <select id="categoriaFiltro" class="form-select filtro-mapa">
+                        <option value="TODAS">-- Todas --</option>
+                        {{#each categorias}}
+                            <option value="{{this}}">{{this}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label for="provinciaFiltro" class="form-label">Provincia:</label>
+                    <select id="provinciaFiltro" class="form-select filtro-mapa">
+                        <option value="TODAS">-- Todas --</option>
+                        {{#each provincias}}
+                            <option value="{{this}}">{{this}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label for="origenFiltro" class="form-label">Origen:</label>
+                    <select id="origenFiltro" class="form-select filtro-mapa">
+                        <option value="TODAS">-- Todos --</option>
+                        {{#each origenes}}
+                            <option value="{{this}}">{{this}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label for="fechaFiltro" class="form-label">Fecha (Desde):</label>
+                    <input type="date" id="fechaFiltro" class="form-control filtro-mapa">
+                </div>
+            </div>
+        </div>
+        <div id="map" class="fade-in-up"></div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        const map = L.map('map').setView([-38.4161, -63.6167], 4);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19 }).addTo(map);
+
+        const hechosData = JSON.parse(`{{{ hechosJson }}}`);
+        const markers = [];
+        const layerGroup = L.layerGroup().addTo(map);
+
+        hechosData.forEach(hecho => {
+            if (hecho.lat != null && hecho.lon != null) {
+                const marker = L.marker([hecho.lat, hecho.lon], {
+                    options: hecho
+                });
+                marker.bindPopup(`<b>${hecho.titulo}</b><br><a href="/hechos/${hecho.id}">Ver detalle</a>`);
+                markers.push(marker);
+            }
+        });
+
+        function aplicarFiltros() {
+            const categoriaSeleccionada = document.getElementById('categoriaFiltro').value;
+            const provinciaSeleccionada = document.getElementById('provinciaFiltro').value;
+            const origenSeleccionado = document.getElementById('origenFiltro').value;
+            const fechaMinima = document.getElementById('fechaFiltro').value;
+
+            layerGroup.clearLayers();
+
+            markers.forEach(marker => {
+                const hecho = marker.options.options;
+
+                const pasaCategoria = categoriaSeleccionada === 'TODAS' || hecho.categoria === categoriaSeleccionada;
+                const pasaProvincia = provinciaSeleccionada === 'TODAS' || hecho.provincia === provinciaSeleccionada;
+                const pasaOrigen = origenSeleccionado === 'TODAS' || hecho.origen === origenSeleccionado;
+                const pasaFecha = !fechaMinima || hecho.fechaAcontecimiento >= fechaMinima;
+
+                if (pasaCategoria && pasaProvincia && pasaOrigen && pasaFecha) {
+                    layerGroup.addLayer(marker);
+                }
+            });
+        }
+
+        document.querySelectorAll('.filtro-mapa').forEach(element => {
+            element.addEventListener('change', aplicarFiltros);
+        });
+
+        aplicarFiltros();
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <div class="d-flex justify-content-center my-4">
+        <a href="/" class="btn btn-primary btn-lg" style="background-color: #007bff; color: #fff; border: none; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+            Volver al Inicio
+        </a>
+    </div>
+</body>
+</html>            
+</head>

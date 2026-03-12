@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro de contribuyente</title>
+
+    <link rel="stylesheet" href="/templates/static/base.css">
+    <link rel="stylesheet" href="/templates/static/pages/registro.css">
+</head>
+<body class="registro-page">
+
+<div class="registro-card fade-in-up">
+    <h1>Registro de contribuyente</h1>
+
+    {{#if error}}
+        <div class="registro-error">{{error}}</div>
+    {{/if}}
+
+    <form class="registro-form" method="post" action="/registro">
+        <div class="form-group">
+            <label for="username">Usuario</label>
+            <input id="username" type="text" name="username" value="{{username}}" placeholder="Ingresá tu usuario" required>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Contraseña</label>
+            <input id="password" type="password" name="password" placeholder="Ingresá tu contraseña" required>
+        </div>
+
+        <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input id="nombre" type="text" name="nombre" value="{{nombre}}" placeholder="Tu nombre" required>
+        </div>
+
+        <div class="form-group">
+            <label for="apellido">Apellido</label>
+            <input id="apellido" type="text" name="apellido" value="{{apellido}}" placeholder="Tu apellido">
+        </div>
+
+        <button type="submit" class="registro-btn hover-lift shimmer-effect">Registrarme</button>
+
+        <div class="registro-actions">
+            <p>¿Ya tenés cuenta? <a href="/login">Iniciá sesión</a></p>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

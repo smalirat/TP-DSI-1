@@ -1,0 +1,30 @@
+body {
+    background: #f8f6f2;
+    min-height: 100vh;
+}
+
+.navbar {
+    background: #fff;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.navbar-brand {
+    color: #333;
+}
+
+.display-5 {
+    color: #333;
+}
+
+.lead {
+    color: #555;
+}
+
+.container {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+}
+
+.badge.bg-secondary {
+    background-color: #6c757d;
+}

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Crear Nueva Fuente (Admin)</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./static/pages/fuentes_nuevas.css" rel="stylesheet">
+    <link href="./static/base.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="floating-elements"></div>
+
+<div class="container fade-in-up">
+    <h1>Crear Nueva Fuente de Datos</h1>
+
+    <div class="glass-container">
+        <p class="lead">Esta acción es solo para administradores. Se creará una <strong>Fuente de Datos Dinámica</strong> vacía.</p>
+
+        <form action="/admin/fuentes" method="POST" class="mt-4">
+            <p>Al hacer clic en el botón, se generará una nueva instancia para recibir contribuciones de usuarios.</p>
+
+            <div class="d-flex flex-wrap justify-content-center gap-3 mt-4">
+                <button type="submit" class="btn btn-success shimmer-effect hover-lift">
+                    Confirmar Creación
+                </button>
+                <a href="/fuentes" class="btn btn-secondary hover-lift">
+                    Cancelar y Volver
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

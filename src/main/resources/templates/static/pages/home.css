@@ -1,0 +1,60 @@
+/*
+ * MetaMapa - Home Page Styles
+ * Estilos específicos para la página de inicio
+ */
+
+/* Contenedor principal de bienvenida */
+.welcome-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    text-align: center;
+    position: relative;
+}
+
+.welcome-content {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    padding: 3rem 2rem;
+    max-width: 800px;
+    margin: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Título principal del home con gradiente */
+.home-title {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Texto descriptivo principal */
+.lead {
+    color: #4a5568;
+    font-size: 1.3rem;
+    line-height: 1.6;
+    margin-bottom: 2.5rem;
+}
+
+/* Sección de información del usuario */
+.user-section {
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 15px;
+    padding: 1.5rem;
+    margin-top: 2rem;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.user-info {
+    color: #374151;
+    font-weight: 500;
+    margin-bottom: 1rem;
+}

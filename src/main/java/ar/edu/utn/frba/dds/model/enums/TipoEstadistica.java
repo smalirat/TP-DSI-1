@@ -1,0 +1,13 @@
+package ar.edu.utn.frba.dds.model.enums;
+
+public enum TipoEstadistica {
+  HECHOS_POR_PROVINCIA_COLECCION,
+
+  CATEGORIA_MAS_REPORTADA,
+
+  PROVINCIA_MAS_HECHOS_POR_CATEGORIA,
+
+  HORA_PICO_POR_CATEGORIA,
+
+  SOLICITUDES_SPAM
+}

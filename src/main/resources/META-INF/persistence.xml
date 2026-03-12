@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence" version="3.0">
+  <persistence-unit name="sistemaPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+    <class>ar.edu.utn.frba.dds.model.hechos.Hecho</class>
+    <class>ar.edu.utn.frba.dds.model.hechos.ContenidoMultimedia</class>
+    <class>ar.edu.utn.frba.dds.model.solicitudes.SolicitudEliminacion</class>
+    <class>ar.edu.utn.frba.dds.model.hechos.Coleccion</class>
+    <class>ar.edu.utn.frba.dds.model.usuarios.Usuario</class>
+
+    <properties>
+      <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+
+      <property name="jakarta.persistence.jdbc.url"
+                value="jdbc:postgresql://dpg-d4v4v1re5dus73a73llg-a:5432/sistemadb_eo79"/>
+
+
+
+      <property name="jakarta.persistence.jdbc.user" value="sistemadb"/>
+      <property name="jakarta.persistence.jdbc.password" value="A3IZVFdu7wMPSs8wUkc8XKvxW3WSXLgm"/>
+
+      <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
+
+      <property name="hibernate.hbm2ddl.auto" value="update"/>
+      <property name="hibernate.show_sql" value="true"/>
+      <property name="hibernate.format_sql" value="true"/>
+    </properties>
+  </persistence-unit>
+</persistence>

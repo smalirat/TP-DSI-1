@@ -1,0 +1,257 @@
+/*
+ * MetaMapa - Estilos Base
+ * Contiene estilos fundamentales compartidos en toda la aplicación
+ */
+
+/* Reset y configuración básica */
+body, html {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px 0;
+}
+
+/* Contenedores base */
+.container {
+    max-width: 1200px;
+}
+
+/* Títulos principales */
+h1 {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #2d3748;
+    font-weight: 700;
+    position: relative;
+    text-shadow: 0 2px 8px rgba(102, 126, 234, 0.15);
+}
+
+/* ===========================
+   Feedback visual de formularios
+   =========================== */
+
+.form-status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+    animation: fadeInUp 0.4s ease forwards;
+}
+
+.form-status.success {
+    background: rgba(16, 185, 129, 0.15);
+    border: 1px solid rgba(16, 185, 129, 0.4);
+    color: #065f46;
+}
+
+.form-status.error {
+    background: rgba(239, 68, 68, 0.15);
+    border: 1px solid rgba(239, 68, 68, 0.4);
+    color: #7f1d1d;
+}
+
+.form-status .icon {
+    font-size: 1.6rem;
+}
+
+/*FIN DEL FORMULARIO*/
+
+/* Contenedores con glassmorphism */
+.glass-container {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.glass-container-light {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    padding: 1rem 1.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.glass-section {
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 15px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    border: 1px solid rgba(102, 126, 234, 0.1);
+}
+
+/* Navegación consistente */
+.navigation-container {
+    text-align: center;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Elementos flotantes animados */
+.floating-elements {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.floating-elements::before,
+.floating-elements::after {
+    content: '';
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    animation: float 6s ease-in-out infinite;
+}
+
+.floating-elements::before {
+    top: 20%;
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.floating-elements::after {
+    bottom: 20%;
+    right: 10%;
+    animation-delay: 3s;
+}
+
+/* Animaciones globales */
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in-up {
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+/* Estados de hover y interacción */
+.hover-lift {
+    transition: all 0.3s ease;
+}
+
+.hover-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Efectos shimmer para botones */
+.shimmer-effect {
+    position: relative;
+    overflow: hidden;
+}
+
+.shimmer-effect::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.shimmer-effect:hover::before {
+    left: 100%;
+}
+
+/* Responsive base */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 1rem;
+    }
+    
+    h1 {
+        font-size: 1.8rem;
+        padding: 1rem;
+    }
+    
+    .glass-container {
+        padding: 1.5rem;
+    }
+}
+
+/* Variables CSS para colores principales */
+:root {
+    --primary-gradient: linear-gradient(45deg, #667eea, #764ba2);
+    --success-gradient: linear-gradient(45deg, #10b981, #059669);
+    --warning-gradient: linear-gradient(45deg, #f59e0b, #d97706);
+    --danger-gradient: linear-gradient(45deg, #ef4444, #dc2626);
+    --secondary-gradient: linear-gradient(45deg, #6b7280, #4b5563);
+    
+    --text-primary: #2d3748;
+    --text-secondary: #4a5568;
+    --text-muted: #718096;
+    
+    --border-light: rgba(102, 126, 234, 0.2);
+    --border-focus: #667eea;
+}
+
+/* Estilos específicos para navbars */
+.navbar .nav-link {
+    color: #495057 !important;
+    font-weight: 400;
+    transition: all 0.3s ease;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+}
+
+.navbar .nav-link:hover {
+    color: #007bff !important;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.navbar .nav-link.active {
+    color: #007bff !important;
+    font-weight: bold !important;
+    background-color: rgba(0, 123, 255, 0.1) !important;
+    border-radius: 6px;
+    text-decoration: none;
+}
+
+.navbar .nav-link.active:hover {
+    color: #0056b3 !important;
+    background-color: rgba(0, 123, 255, 0.15) !important;
+}

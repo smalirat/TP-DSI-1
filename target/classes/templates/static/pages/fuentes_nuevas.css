@@ -1,0 +1,83 @@
+/*
+ * MetaMapa - Estilos específicos para la página Crear Fuente
+ * Basado en base.css
+ */
+
+body {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+/* Encabezado */
+h1 {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(12px);
+    border-radius: 18px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    color: #2d3748;
+    text-shadow: 0 1px 8px rgba(102, 126, 234, 0.1);
+}
+
+/* Contenedor del formulario */
+.glass-container {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    padding: 2.5rem;
+    text-align: center;
+    border: 1px solid var(--border-light);
+}
+
+/* Texto */
+p, .lead {
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+}
+
+/* Botones */
+button.btn-success {
+    background: var(--success-gradient);
+    border: none;
+    padding: 0.7rem 1.5rem;
+    border-radius: 10px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+button.btn-success:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
+}
+
+a.btn-secondary {
+    background: var(--secondary-gradient);
+    border: none;
+    padding: 0.7rem 1.5rem;
+    border-radius: 10px;
+    color: white;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+a.btn-secondary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(75, 85, 99, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    body {
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+
+    .glass-container {
+        padding: 1.5rem;
+    }
+
+    h1 {
+        font-size: 1.6rem;
+    }
+}

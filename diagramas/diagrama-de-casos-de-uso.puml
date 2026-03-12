@@ -1,0 +1,28 @@
+@startuml
+left to right direction
+actor "Administrador" as Admin
+actor "Contribuyente" as Cont
+actor "Visualizador" as Vis
+
+rectangle "Sistema MetaMapa" {
+
+  (Crear colección) as UC1
+  (Importar hechos desde CSV) as UC2
+  (Navegar hechos de una colección) as UC3
+  (Filtrar hechos de una colección) as UC4
+  (Solicitar eliminación de un hecho) as UC5
+  (Aceptar o rechazar solicitud de eliminación) as UC6
+
+  Admin --> UC1
+  Admin --> UC2
+  Admin --> UC6
+
+  Cont --> UC5
+  Cont --> UC3
+  Cont --> UC4
+
+  Vis --> UC3
+  Vis --> UC4
+}
+
+@enduml

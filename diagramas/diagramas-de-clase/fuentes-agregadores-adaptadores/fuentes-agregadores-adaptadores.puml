@@ -1,0 +1,112 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+abstract class FuenteDatos {
+    + {abstract} obtenerHechos(): List<Hecho>
+    + eliminarHecho(Hecho): void
+}
+
+class FuenteEstatica {
+    - archivoCsv: File
+    + FuenteEstatica(File)
+    + obtenerHechos(): List<Hecho>
+    - validarEncabezado(String): boolean
+    - parsearLinea(String): Hecho
+    - validarCampos(...): void
+}
+
+class FuenteDinamica {
+    - hechos: List<Hecho>
+    + cargarHecho(Hecho): void
+    + obtenerHechos(): List<Hecho>
+    + modificarHecho(Hecho, Hecho): void
+    + getHechos(): List<Hecho>
+}
+
+abstract class FuenteProxy {
+    # adaptador: AdaptadorFuenteExterna
+    # hechos: List<Hecho>
+    + FuenteProxy(AdaptadorFuenteExterna)
+    # estaDisponible(): boolean
+    + {abstract} actualizarHechos(): void
+    + obtenerHechos(): List<Hecho>
+}
+
+class FuenteDemo {
+    + FuenteDemo(Conexion, URL)
+    + actualizarHechos(): void
+    + cargarHecho(Hecho): void
+    - validarConexion(Conexion): Conexion
+    - validarUrl(URL): URL
+}
+
+class FuenteMetaMapa {
+    + FuenteMetaMapa(ClienteAPIMetaMapa, String)
+    + actualizarHechos(): void
+    + actualizarHechosLocales(List<Hecho>): void
+}
+
+interface AdaptadorFuenteExterna {
+    + obtenerHechos(): List<Hecho>
+    + estaDisponible(): boolean
+}
+
+class AdaptadorFuenteDemo {
+    - conexion: Conexion
+    - url: URL
+    - ultimaActualizacion: LocalDateTime
+    + AdaptadorFuenteDemo(Conexion, URL)
+    + obtenerHechos(): List<Hecho>
+    + estaDisponible(): boolean
+    - mapearHechoExterno(Map<String, Object>): Hecho
+}
+
+class AdaptadorFuenteMetaMapa {
+    - clienteAPI: ClienteAPIMetaMapa
+    - identificadorColeccion: String
+    + AdaptadorFuenteMetaMapa(ClienteAPIMetaMapa, String)
+    + obtenerHechos(): List<Hecho>
+    + estaDisponible(): boolean
+}
+
+class Agregador {
+    - fuentes: List<FuenteDatos>
+    - cacheLocal: List<Hecho>
+    - scheduler: ScheduledExecutorService
+    - periodoActualizacion: long
+    - unidadTiempo: TimeUnit
+    + Agregador()
+    + obtenerHechosUnificados(): List<Hecho>
+    + obtenerHechosDe(FuenteDatos): List<Hecho>
+    + agregarFuente(FuenteDatos): void
+    + quitarFuente(FuenteDatos): void
+    + forzarActualizacion(): void
+    + configurarActualizacion(long, TimeUnit): void
+    - actualizarCache(): void
+    - iniciarActualizaciones(): void
+    + detenerActualizaciones(): void
+}
+
+class AgregadorScheduler {
+    - scheduler: ScheduledExecutorService
+    + programarActualizacion(Agregador, long, TimeUnit): void
+    + detener(): void
+}
+
+' Herencia y composición
+FuenteEstatica --|> FuenteDatos
+FuenteDinamica --|> FuenteDatos
+FuenteProxy --|> FuenteDatos
+FuenteDemo --|> FuenteProxy
+FuenteMetaMapa --|> FuenteProxy
+
+AdaptadorFuenteDemo ..|> AdaptadorFuenteExterna
+AdaptadorFuenteMetaMapa ..|> AdaptadorFuenteExterna
+
+FuenteProxy *-- AdaptadorFuenteExterna
+AdaptadorFuenteDemo *-- Conexion
+AdaptadorFuenteMetaMapa *-- ClienteAPIMetaMapa
+Agregador o-- FuenteDatos
+AgregadorScheduler --> Agregador
+
+@enduml

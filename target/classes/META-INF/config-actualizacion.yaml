@@ -1,0 +1,4 @@
+# config-actualizacion.yaml
+servicio: agregacion
+accion: actualizar-hechos
+intervalo-minutos: 5

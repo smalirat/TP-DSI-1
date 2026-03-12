@@ -1,0 +1,43 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+' ==== Clases del dominio ya existentes ====
+class Hecho {
+  - titulo: String
+  - descripcion: String
+  - categoria: String
+  - provincia: String
+}
+
+class Agregador {
+  + obtenerHechos(): List<Hecho>
+}
+
+' ==== Nuevo componente del buscador ====
+class BuscadorTextoLibre {
+  - indexador: Indexador
+  - agregador: Agregador
+  + construirIndice(): void
+  + buscar(consulta: String): List<Hecho>
+}
+
+interface Indexador {
+  + indexar(hecho: Hecho): void
+  + buscar(consulta: String): List<Hecho>
+}
+
+class IndexadorSimple {
+  - hechos: List<Hecho>
+  + indexar(hecho: Hecho): void
+  + buscar(consulta: String): List<Hecho>
+}
+
+' ==== Relaciones ====
+BuscadorTextoLibre --> Agregador : usa
+BuscadorTextoLibre --> Indexador
+Indexador <|.. IndexadorSimple
+IndexadorSimple --> Hecho
+Agregador --> Hecho
+
+@enduml
+

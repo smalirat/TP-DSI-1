@@ -1,0 +1,81 @@
+<!-- Navbar para Administradores -->
+<nav class="navbar navbar-expand-lg navbar-light" style="background: #fff; border-bottom: 1px solid #e5e5e5;">
+    <div class="container-fluid">
+        <a class="navbar-brand fw-bold" href="/admin" style="color: #333;">Administración - MetaMapa</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0" id="adminNavbar">
+                <li class="nav-item">
+                    <a class="nav-link" data-tab="solicitudes" href="/admin/solicitudes">Solicitudes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-tab="colecciones" href="/admin/colecciones">Colecciones</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-tab="fuentes" href="/fuentes">Fuentes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-tab="hechos" href="/admin/hechos">Hechos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-tab="estadisticas" href="/admin/estadisticas">Estadísticas</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav mb-2 mb-lg-0">
+                {{#if usuarioUsername}}
+                    <li class="nav-item">
+                        <span class="nav-link">Sesión: <strong>{{usuarioUsername}}</strong> 
+                            <span class="badge bg-secondary ms-2">{{usuarioRol}}</span>
+                        </span>
+                    </li>
+                    <li class="nav-item">
+                        <form method="post" action="/logout" style="display:inline">
+                            <button type="submit" class="btn btn-danger ms-2">Cerrar Sesión</button>
+                        </form>
+                    </li>
+                {{else}}
+                    <li class="nav-item">
+                        <a href="/login" class="btn btn-outline-primary ms-2">Iniciar Sesión</a>
+                    </li>
+                {{/if}}
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Obtener la URL actual
+    const currentPath = window.location.pathname;
+    
+    // Mapear URLs a tabs
+    const pathToTab = {
+        '/admin/solicitudes': 'solicitudes',
+        '/admin/colecciones': 'colecciones', 
+        '/fuentes': 'fuentes',
+        '/admin/hechos': 'hechos',
+        '/admin/estadisticas': 'estadisticas'
+    };
+    
+    // Encontrar el tab correspondiente a la URL actual
+    let activeTab = null;
+    for (const [path, tab] of Object.entries(pathToTab)) {
+        if (currentPath.startsWith(path)) {
+            activeTab = tab;
+            break;
+        }
+    }
+    
+    // Si encontramos un tab activo, marcarlo
+    if (activeTab) {
+        const navLinks = document.querySelectorAll('#adminNavbar .nav-link');
+        navLinks.forEach(link => {
+            if (link.getAttribute('data-tab') === activeTab) {
+                link.classList.add('active');
+            }
+        });
+    }
+});
+</script>

@@ -1,0 +1,159 @@
+/*
+ * MetaMapa - Solicitudes Page Styles
+ * Estilos específicos para la página de solicitudes
+ */
+
+.subtitle {
+    color: #4a5568;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.solicitudes-container {
+    min-height: 200px;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+    border: 1px solid #ececec;
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.solicitud-item {
+    background: #fff;
+    border: 2px solid #ececec;
+    border-radius: 15px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.solicitud-item:hover {
+    box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+    border-color: #bdbdbd;
+}
+
+.solicitud-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    transition: width 0.3s ease;
+}
+
+.solicitud-item:hover::before {
+    width: 8px;
+}
+
+.solicitud-title {
+    color: #2d3748;
+    font-weight: 700;
+    font-size: 1.15rem;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.solicitud-title:hover {
+    color: #667eea;
+    text-decoration: none;
+}
+
+.solicitud-description {
+    color: #4a5568;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 0;
+}
+
+.solicitud-date {
+    font-size: 0.95rem;
+}
+
+.no-solicitudes {
+    background: #f5f5f5;
+    color: #333;
+    border: 1px solid #ececec;
+    border-radius: 15px;
+    padding: 2rem;
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 500;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+}
+
+@media (max-width: 768px) {
+    .solicitud-item {
+        padding: 1rem;
+    }
+    .d-flex {
+        flex-direction: column;
+        align-items: flex-start !important;
+    }
+    .ms-3 {
+        margin-left: 0 !important;
+        margin-top: 1rem;
+    }
+}
+/*
+ * MetaMapa - Solicitudes Styles
+ * Estilos para la vista de solicitudes de administración
+ */
+
+body {
+    background: #f8f6f2;
+    min-height: 100vh;
+}
+
+.solicitudes-container {
+    min-height: 200px;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+    border: 1px solid #ececec;
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.solicitudes-title {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.solicitudes-lead {
+    color: #4a5568;
+    font-size: 1.15rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.table {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.07);
+}
+
+.table th {
+    background: #f3f4f6;
+    color: #667eea;
+    font-weight: 600;
+}
+
+.table td {
+    color: #374151;
+}
+
+.btn-success, .btn-danger {
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}

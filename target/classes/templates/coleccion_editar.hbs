@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Editar Colección: {{coleccion.titulo}}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container mt-4">
+
+<h1>Editar Colección "{{coleccion.titulo}}"</h1>
+<p>Modifica los detalles de la colección (Handle: {{coleccion.handle}}).</p>
+
+<form action="/admin/colecciones/{{coleccion.handle}}" method="POST" class="mt-4">
+    <input type="hidden" name="_method" value="PUT">
+
+    <div class="mb-3">
+        <label for="titulo" class="form-label">Título</label>
+        <input type="text" class="form-control" id="titulo" name="titulo" value="{{coleccion.titulo}}" required>
+    </div>
+    <div class="mb-3">
+        <label for="descripcion" class="form-label">Descripción</label>
+        <textarea class="form-control" id="descripcion" name="descripcion" rows="3">{{coleccion.descripcion}}</textarea>
+    </div>
+
+    <div class="mb-3">
+        <label for="fuenteId" class="form-label">Fuente de Datos</label>
+        <select id="fuenteId" name="fuenteId" class="form-select" required>
+            {{#each todasLasFuentes}}
+                <option value="{{id}}" {{#if (eq id ../coleccion.fuente.id)}}selected{{/if}}>
+                    ID: {{id}} (Tipo: {{DTYPE}}) {{#if rutaArchivoCsv}} - {{rutaArchivoCsv}} {{/if}} {{#if url}} - {{url}} {{/if}}
+                </option>
+            {{/each}}
+        </select>
+        <div class="form-text">Selecciona la fuente que alimentará esta colección.</div>
+    </div>
+
+    <div class="mb-3">
+        <label for="algoritmoConsenso" class="form-label">Algoritmo de Consenso</label>
+        <select id="algoritmoConsenso" name="algoritmoConsenso" class="form-select">
+            {{#with coleccion}}
+                <option value="NINGUNO" {{#if (eq getTipoAlgoritmoConsenso 'NINGUNO')}}selected{{/if}}>Ninguno (Modo Irrestricto)</option>
+                {{#each ../todosLosAlgoritmos}}
+                    <option value="{{this}}" {{#if (eq this ../coleccion.getTipoAlgoritmoConsenso)}}selected{{/if}}>{{this}}</option>
+                {{/each}}
+            {{/with}}
+        </select>
+        <div class="form-text">Si seleccionas un algoritmo, la colección operará en Modo Curado.</div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+    <a href="/colecciones" class="btn btn-secondary">Cancelar</a>
+
+    <form action="/admin/colecciones/{{coleccion.handle}}/delete" method="POST" class="mt-3 d-inline" onsubmit="return confirm('¿Estás seguro de que deseas eliminar esta colección?');">
+        <input type="hidden" name="_method" value="DELETE">
+        <button type="submit" class="btn btn-danger">Eliminar Colección</button>
+    </form>
+</form>
+
+</body>
+</html>

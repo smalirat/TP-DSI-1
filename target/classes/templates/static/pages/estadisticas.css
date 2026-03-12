@@ -1,0 +1,57 @@
+/*
+ * MetaMapa - Estadísticas Page Styles
+ * Estilos específicos para la página de estadísticas
+ */
+
+body {
+    background: #f8f6f2;
+    min-height: 100vh;
+}
+
+.navbar {
+    background: #fff;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.navbar-brand {
+    color: #333;
+}
+
+.display-5 {
+    color: #333;
+}
+
+h1 {
+    color: #333;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.badge.bg-secondary {
+    background-color: #6c757d;
+}
+
+.table {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+    overflow: hidden;
+}
+
+.table th, .table td {
+    vertical-align: middle;
+}
+
+.btn-primary, .btn-success {
+    font-weight: 500;
+}
+
+@media (max-width: 768px) {
+    .container-fluid {
+        padding: 1rem;
+    }
+    h1 {
+        font-size: 1.5rem;
+    }
+}

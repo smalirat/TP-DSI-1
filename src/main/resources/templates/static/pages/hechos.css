@@ -1,0 +1,111 @@
+/*
+ * MetaMapa - Facts List Page Styles
+ * Estilos específicos para la página de lista de hechos
+ */
+
+body {
+    background: #f8f6f2;
+    min-height: 100vh;
+}
+
+.navbar {
+    background: #fff;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.navbar-brand {
+    color: #333;
+}
+
+.display-5 {
+    color: #333;
+}
+
+/* Contenedor de búsqueda */
+.search-container {
+    background: #fff;
+    border-radius: 15px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+    border: 1px solid #ececec;
+}
+
+/* Contenedor de hechos */
+.facts-container {
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+    border: 1px solid #ececec;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    min-height: 200px;
+}
+
+/* Items de hechos */
+.fact-item {
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    font-size: 1.1rem;
+    display: block;
+    position: relative;
+}
+
+.fact-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    border-color: #007bff;
+    color: #007bff;
+    text-decoration: none;
+}
+
+/* Estados sin hechos */
+.no-facts {
+    text-align: center;
+    padding: 3rem 2rem;
+    color: #6c757d;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .facts-container, .search-container {
+        padding: 1.5rem;
+        margin: 1rem;
+    }
+    
+    .fact-item {
+        padding: 1rem;
+        font-size: 1rem;
+    }
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1050;
+}
+
+.modal-hecho {
+    background: #ffffff;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 700px;
+    padding: 2rem;              /* 👈 margen interno */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}

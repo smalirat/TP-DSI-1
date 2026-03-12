@@ -1,0 +1,44 @@
+
+Tareas Principales:
+Arreglar la obtencion de hechos de cada fuente. Esto se debe hacer con obtener hechos.
+Hay que crear csvs y extras para probar que funcione. En la db se persiste la informacion
+de los extras, como la ruta del csv, pero no los hechos salvo los de la dinamica.
+Para dinamica y estatica ya funciona, asi que por ahora dejenlo asi.
+--> Revisar servicios temporales (mientras no funcionen las fuentes proxys no hacer esto, solo estadistica)
+
+
+Revisar Planificacion Externa
+
+Las estadisticas solo verifican los hechos de la db
+
+
+
+
+Tareas Back y mvc
+Hacer mas robusta la persistencia de el algoritmo
+Reescribir scripts
+Revisar spam automatico
+
+
+Tareas front y mvc
+Correjir renderizado de imagen --> almacenar hexadecimal del binario.
+Organzar los templates e incluir css
+Agregar boton volver al mapa en hecho.hbs
+Revisar metodos de hecho service y hecho controller, refactorizar
+los hechos de admin solo se estan mostrando los no eliminados.
+
+Tareas Secundarias
+    Actualizar diagrama de clases
+
+Preguntas:
+Como manejo el handle? automatico?. Interpreto lo segundo asi que hay q tal vez hay que refactorizar
+Como manejo ids de los hechos no persistidos
+Solo se pueden eliminar hechos de fuentes dinamicas?
+
+Urgente:
+Coompletar con correcciones
+Ordenar controller services, rutas, y front de hechos y colecciones para mostrar manejo de temas
+Comentar con "TODO" codigo feo (generado x ia)
+
+
+

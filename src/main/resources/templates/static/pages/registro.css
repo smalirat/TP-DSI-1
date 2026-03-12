@@ -1,0 +1,148 @@
+/* Fondo general */
+.registro-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: var(--primary-gradient);
+    background-attachment: fixed;
+    padding: 60px 1rem; /* 🔹 Antes: 1rem — ahora tiene espacio arriba y abajo */
+}
+
+/* Tarjeta principal */
+.registro-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    border-radius: 20px;
+    box-shadow: 0 18px 50px rgba(15, 23, 42, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 2.5rem 2rem;
+    width: 100%;
+    max-width: 420px;
+    animation: fadeInUp 0.6s ease both;
+}
+
+/* Título */
+.registro-card h1 {
+    text-align: center;
+    margin-bottom: 1.8rem;
+    color: var(--text-primary);
+    font-weight: 700;
+    font-size: 1.8rem;
+}
+
+/* Mensaje de error */
+.registro-error {
+    background: rgba(239, 68, 68, 0.12);
+    border: 1px solid rgba(239, 68, 68, 0.25);
+    color: #b91c1c;
+    padding: .75rem 1rem;
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+/* Formulario */
+.registro-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+/* Campos de formulario */
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.4rem;
+}
+
+/* Inputs */
+.registro-form input {
+    padding: 0.75rem 1rem;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.85);
+    font-size: 1rem;
+    color: #1a202c;
+    outline: none;
+    transition: all 0.25s ease;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.registro-form input::placeholder {
+    color: #a0aec0;
+}
+
+.registro-form input:focus {
+    border-color: var(--border-focus);
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.15);
+    background-color: #fff;
+}
+
+/* Botón principal */
+.registro-btn {
+    margin-top: 0.8rem;
+    padding: 0.9rem 1rem;
+    font-size: 1.05rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.25);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.registro-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(102, 126, 234, 0.35);
+}
+
+.registro-btn:active {
+    transform: translateY(-1px);
+}
+
+/* Enlace inferior */
+.registro-actions {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.registro-actions a {
+    color: #5b6ee6;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.registro-actions a:hover {
+    text-decoration: underline;
+}
+
+/* Animación */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .registro-card {
+        padding: 1.8rem 1.5rem;
+    }
+
+    .registro-page {
+        padding: 40px 1rem; /* 🔹 Menos padding vertical en móviles */
+    }
+}

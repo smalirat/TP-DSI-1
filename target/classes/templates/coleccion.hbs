@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{coleccion.titulo}} - MetaMapa</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container mt-4">
+
+<h1>{{coleccion.titulo}}</h1>
+<p class="lead">{{coleccion.descripcion}}</p>
+<hr>
+
+<h3>Hechos en esta colección:</h3>
+
+<form class="row g-2 mt-2" method="get">
+    <div class="col-auto">
+        <input type="text" class="form-control" name="q" placeholder="Buscar..." value="{{consulta}}">
+    </div>
+    <div class="col-auto">
+        <button type="submit" class="btn btn-primary">Aplicar</button>
+    </div>
+    {{#if consulta}}
+    <div class="col-auto">
+        <a href="/colecciones/{{coleccion.handle}}" class="btn btn-outline-secondary">Limpiar</a>
+    </div>
+    {{/if}}
+  </form>
+
+<div class="list-group mt-3">
+    {{#if hechos}}
+        {{#each hechos}}
+            <a href="/hechos/{{id}}" class="list-group-item list-group-item-action">
+                <h5 class="mb-1">{{titulo}}</h5>
+                <p class="mb-1 text-muted">{{descripcion}}</p>
+                <small class="text-muted">Fecha: {{fechaAcontecimiento}} - Provincia: {{provincia}} - Categoría: {{categoria}}</small>
+            </a>
+        {{/each}}
+    {{else}}
+        <div class="alert alert-info">
+            Esta colección aún no tiene hechos para mostrar.
+        </div>
+    {{/if}}
+</div>
+
+<a href="/colecciones" class="btn btn-secondary mt-4">Volver a todas las colecciones</a>
+
+</body>
+</html>

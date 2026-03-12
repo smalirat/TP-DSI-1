@@ -1,0 +1,7 @@
+<script>
+    if (typeof Handlebars !== 'undefined' && !Handlebars.helpers.eq) {
+        Handlebars.registerHelper('eq', function (a, b) {
+            return a === b;
+        });
+    }
+</script>

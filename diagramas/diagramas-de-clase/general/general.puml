@@ -1,0 +1,34 @@
+@startuml
+
+
+
+' Clases clave
+class Hecho
+class Coleccion
+class FuenteDatos
+class FuenteProxy
+class AdaptadorFuenteExterna
+class Agregador
+class SolicitudEliminacion
+class Estadistica
+class Categoria
+class Provincia
+
+class AlgoritmoConsenso
+
+
+' Relaciones principales
+Hecho --> Coleccion
+Coleccion --> FuenteDatos
+FuenteProxy --> AdaptadorFuenteExterna
+Coleccion --> Agregador
+Coleccion --> AlgoritmoConsenso
+SolicitudEliminacion --> Hecho
+Hecho --> Categoria
+Hecho --> Provincia
+
+
+' Herencia
+FuenteProxy --|> FuenteDatos
+
+@enduml

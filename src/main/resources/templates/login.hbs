@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Iniciar sesión</title>
+
+    <!-- ✅ Rutas correctas -->
+    <link rel="stylesheet" href="/templates/static/base.css">
+    <link rel="stylesheet" href="/templates/static/pages/login.css">
+</head>
+<body class="login-page">
+
+<div class="login-card fade-in-up">
+    <h1>Iniciar sesión</h1>
+
+    {{#if error}}
+        <div class="login-error">{{error}}</div>
+    {{/if}}
+
+    <form class="login-form" method="post" action="/login">
+        <div class="form-group">
+            <label for="username">Usuario</label>
+            <input id="username" type="text" name="username" placeholder="Ingresá tu usuario" required>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Contraseña</label>
+            <input id="password" type="password" name="password" placeholder="Ingresá tu contraseña" required>
+        </div>
+
+        <button type="submit" class="login-btn hover-lift shimmer-effect">Ingresar</button>
+
+        <div class="login-actions">
+            <p>¿No tenés cuenta? <a href="/registro">Registrate</a></p>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

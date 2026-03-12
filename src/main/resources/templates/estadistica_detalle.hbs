@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Estadística: {{estadistica.nombre}}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+</head>
+<body class="container mt-4">
+
+{{#if estadistica}}
+    <div class="card mb-4">
+        <div class="card-header bg-primary text-white">
+            <h1 class="card-title">{{estadistica.nombre}}</h1>
+        </div>
+        <div class="card-body">
+            <ul class="list-group list-group-flush mb-3">
+                <li class="list-group-item"><strong>ID:</strong> {{estadistica.id}}</li>
+                <li class="list-group-item"><strong>Tipo:</strong> <span class="badge bg-secondary">{{estadistica.tipo}}</span></li>
+                <li class="list-group-item"><strong>Fecha de Cálculo:</strong> {{estadistica.fechaCalculo}}</li>
+                {{#if estadistica.parametros}}
+                    <li class="list-group-item"><strong>Parámetros:</strong> {{estadistica.parametros}}</li>
+                {{/if}}
+                <li class="list-group-item">
+                    <strong>Visibilidad:</strong> 
+                    {{#if estadistica.esPublica}}
+                        <span class="badge bg-success">Pública</span>
+                    {{else}}
+                        <span class="badge bg-warning">Privada</span>
+                    {{/if}}
+                </li>
+            </ul>
+
+            <div class="mt-4">
+                <a href="/estadisticas/{{estadistica.id}}/csv" class="btn btn-success">Descargar CSV</a>
+                <a href="/estadisticas" class="btn btn-secondary">Volver a Estadísticas</a>
+                {{#if (eq usuarioRol "ADMIN")}}
+                    <a href="/admin/estadisticas" class="btn btn-outline-primary">Panel Admin</a>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+{{else}}
+    <div class="alert alert-danger">Estadística no encontrada.</div>
+    <a href="/estadisticas" class="btn btn-secondary">Volver a Estadísticas</a>
+{{/if}}
+
+<script>
+    if (typeof Handlebars !== 'undefined' && !Handlebars.helpers.eq) {
+        Handlebars.registerHelper('eq', function (a, b) {
+            return a === b;
+        });
+    }
+</script>
+
+</body>
+</html>
+

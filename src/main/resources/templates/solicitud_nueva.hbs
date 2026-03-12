@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Solicitar Eliminación - MetaMapa</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container mt-4">
+
+<h1>Solicitar Eliminación</h1>
+<p class="lead">Estas a punto de solicitar la eliminación del hecho: <strong>"{{hecho.titulo}}"</strong></p>
+
+<div class="card mt-4">
+    <div class="card-body">
+        <form action="/hechos/{{hecho.id}}/solicitudes" method="POST">
+            <div class="mb-3">
+                <label for="motivo" class="form-label">
+                    Por favor, detalla el motivo de tu solicitud (mínimo 50 caracteres).
+                </label>
+                <textarea class="form-control" id="motivo" name="motivo" rows="8" required minlength="50" maxlength="1000">
+                </textarea>
+            </div>
+            <button type="submit" class="btn btn-danger">Enviar Solicitud</button>
+            <a href="/hechos/{{hecho.id}}" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

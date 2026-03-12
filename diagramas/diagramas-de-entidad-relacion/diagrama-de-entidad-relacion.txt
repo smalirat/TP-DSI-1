@@ -1,0 +1,76 @@
+Table fuente_datos {
+  id bigint [pk, increment]
+  tipo_fuente varchar
+  ruta_archivo_csv varchar
+  url varchar
+  identificador_coleccion varchar
+  ultima_actualizacion datetime
+  base_url varchar
+}
+
+Table hechos {
+  id bigint [pk, increment]
+  titulo varchar(200)
+  descripcion text
+  categoria varchar
+  provincia varchar
+  latitud double
+  longitud double
+  fechaAcontecimiento date
+  fechaCarga date
+  fechaPublicacion date
+  origen varchar
+  eliminado boolean
+  fuente_dinamica_id bigint
+  
+  indexes {
+    categoria [name: 'idx_hecho_categoria']
+    provincia [name: 'idx_hecho_provincia']
+    fechaAcontecimiento [name: 'idx_hecho_fecha']
+  }
+}
+
+Table colecciones {
+  id bigint [pk, increment]
+  titulo varchar(80)
+  descripcion varchar(255)
+  handle varchar(40) [unique]
+  modoNavegacion varchar
+  fuente_id bigint
+}
+
+Table contenidos_multimedia {
+  id bigint [pk, increment]
+  url varchar
+  formato varchar(40)
+  descripcion varchar(255)
+  tipo varchar
+}
+
+Table solicitudes_eliminacion {
+  id bigint [pk, increment]
+  textoFundamentacion varchar(1000)
+  estado varchar
+  fechaSolicitud datetime
+  fechaResolucion datetime
+  motivoRechazo varchar(255)
+  hecho_id bigint
+}
+
+Table hecho_etiquetas {
+  hecho_id bigint
+  etiqueta_nombre varchar(80)
+}
+
+Table agregador_fuentes {
+  agregador_id bigint
+  fuente_id bigint
+}
+
+Ref: fuente_datos.id < hechos.fuente_dinamica_id
+Ref: fuente_datos.id < colecciones.fuente_id
+Ref: hechos.id < contenidos_multimedia.id
+Ref: hechos.id < hecho_etiquetas.hecho_id
+Ref: hechos.id < solicitudes_eliminacion.hecho_id
+Ref: fuente_datos.id < agregador_fuentes.agregador_id
+Ref: fuente_datos.id < agregador_fuentes.fuente_id

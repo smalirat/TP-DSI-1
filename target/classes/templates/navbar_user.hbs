@@ -1,0 +1,96 @@
+<!-- Navbar para Usuarios Normales -->
+<nav class="navbar navbar-expand-lg navbar-light" style="background: #fff; border-bottom: 1px solid #e5e5e5;">
+    <div class="container-fluid">
+        <a class="navbar-brand fw-bold" href="/" style="color: #333;">MetaMapa</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0" id="userNavbar">
+                <li class="nav-item">
+                    <a class="nav-link" data-tab="home" href="/">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-tab="mapa" href="/mapa">Mapa Interactivo</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-tab="colecciones" href="/colecciones">Colecciones</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-tab="hechos" href="/hechos">Hechos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-tab="estadisticas" href="/estadisticas">Estadísticas</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav mb-2 mb-lg-0">
+                {{#if usuarioUsername}}
+                    <li class="nav-item">
+                        <span class="nav-link">Sesión: <strong>{{usuarioUsername}}</strong> 
+                            <span class="badge bg-secondary ms-2">{{usuarioRol}}</span>
+                        </span>
+                    </li>
+                    {{#if (eq usuarioRol 'ADMINISTRADOR')}}
+                        <li class="nav-item">
+                            <a href="/admin" class="btn btn-outline-secondary ms-2">Panel Admin</a>
+                        </li>
+                    {{/if}}
+                    <li class="nav-item">
+                        <form method="post" action="/logout" style="display:inline">
+                            <button type="submit" class="btn btn-danger ms-2">Cerrar Sesión</button>
+                        </form>
+                    </li>
+                {{else}}
+                    <li class="nav-item">
+                        <a href="/login" class="btn btn-outline-primary ms-2">Iniciar Sesión</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/registro" class="btn btn-primary ms-2">Registrarse</a>
+                    </li>
+                {{/if}}
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Obtener la URL actual
+    const currentPath = window.location.pathname;
+    
+    // Mapear URLs a tabs
+    const pathToTab = {
+        '/': 'home',
+        '/mapa': 'mapa',
+        '/colecciones': 'colecciones', 
+        '/hechos': 'hechos',
+        '/estadisticas': 'estadisticas'
+    };
+    
+    // Encontrar el tab correspondiente a la URL actual
+    let activeTab = null;
+    
+    // Para la página de inicio, verificar exactamente
+    if (currentPath === '/') {
+        activeTab = 'home';
+    } else {
+        // Para otras páginas, buscar coincidencias que empiecen con la ruta
+        for (const [path, tab] of Object.entries(pathToTab)) {
+            if (path !== '/' && currentPath.startsWith(path)) {
+                activeTab = tab;
+                break;
+            }
+        }
+    }
+    
+    // Si encontramos un tab activo, marcarlo
+    if (activeTab) {
+        const navLinks = document.querySelectorAll('#userNavbar .nav-link');
+        navLinks.forEach(link => {
+            if (link.getAttribute('data-tab') === activeTab) {
+                link.classList.add('active');
+            }
+        });
+    }
+});
+</script>

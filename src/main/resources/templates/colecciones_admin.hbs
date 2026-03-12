@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración - Colecciones</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/templates/static/base.css">
+    <link rel="stylesheet" href="/templates/static/components.css">
+    <link rel="stylesheet" href="/templates/static/pages/colecciones.css">
+</head>
+
+<body style="background: #f8f6f2; min-height: 100vh;">
+
+{{> navbar_admin}}
+
+<div class="container-fluid py-5">
+
+    <h1 class="display-5 fw-bold mb-2" style="color: #333;">
+        Nuestras Colecciones
+    </h1>
+
+    <p class="subtitle mb-4">
+        Explora las colecciones de hechos disponibles en la plataforma y descubre
+        contenido organizado por temáticas específicas.
+    </p>
+
+    <!-- STATUS FORM -->
+    {{#if statusform}}
+        <div class="alert alert-{{statusform_class}} text-center">
+            {{statusform_message}}
+        </div>
+    {{/if}}
+
+    <!-- BOTÓN CREAR -->
+    <div class="mb-4 d-flex justify-content-center">
+        <button class="btn btn-success"
+                data-bs-toggle="modal"
+                data-bs-target="#modalNuevaColeccion">
+            Crear Nueva Colección
+        </button>
+    </div>
+
+    <!-- LISTADO -->
+    <div class="collections-container">
+        {{#if colecciones}}
+            {{#each colecciones}}
+                <div class="collection-item">
+                    <div class="d-flex w-100 justify-content-between align-items-center">
+
+                        <div class="flex-grow-1">
+                            <a href="/colecciones/{{handle}}"
+                               class="collection-title">
+                                {{titulo}}
+                            </a>
+                            <p class="collection-description">
+                                {{descripcion}}
+                            </p>
+                        </div>
+
+                        <div class="ms-3">
+                            <a href="/admin/colecciones/{{handle}}/editar"
+                               class="btn-edit">
+                                Editar
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            {{/each}}
+        {{else}}
+            <div class="no-collections">
+                No hay colecciones para mostrar en este momento.
+                <br>
+                <small>¡Pronto habrá contenido interesante aquí!</small>
+            </div>
+        {{/if}}
+    </div>
+</div>
+
+<!-- ================= MODAL NUEVA COLECCIÓN ================= -->
+
+<div class="modal fade" id="modalNuevaColeccion" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+
+            <form action="/admin/colecciones" method="POST">
+
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        Crear Nueva Colección
+                    </h5>
+                    <button type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body">
+
+                    <!-- FUENTE -->
+                    <div class="mb-3">
+                        <label class="form-label">
+                            Fuente de Datos *
+                        </label>
+                        <select name="fuenteId"
+                                class="form-select"
+                                required>
+                            <option value="">-- Seleccionar fuente --</option>
+                            {{#each fuentes}}
+                                <option value="{{id}}">
+                                    Fuente ID {{id}} - Tipo: {{tipo}}
+                                </option>
+                            {{/each}}
+                        </select>
+                        <div class="form-text">
+                            Selecciona la fuente que proveerá los hechos.
+                        </div>
+                    </div>
+
+                    <!-- TÍTULO -->
+                    <div class="mb-3">
+                        <label class="form-label">
+                            Título *
+                        </label>
+                        <input type="text"
+                               name="titulo"
+                               class="form-control"
+                               required>
+                    </div>
+
+                    <!-- DESCRIPCIÓN -->
+                    <div class="mb-3">
+                        <label class="form-label">
+                            Descripción
+                        </label>
+                        <textarea name="descripcion"
+                                  class="form-control"
+                                  rows="3"></textarea>
+                    </div>
+
+                    <!-- HANDLE -->
+                    <div class="mb-3">
+                        <label class="form-label">
+                            Handle (identificador único) *
+                        </label>
+                        <input type="text"
+                               name="handle"
+                               class="form-control"
+                               pattern="[a-zA-Z0-9]+"
+                               title="Solo letras y números, sin espacios"
+                               required>
+                        <div class="form-text">
+                            Se usará en la URL (ej: /colecciones/miColeccion)
+                        </div>
+                    </div>
+
+                    <!-- ALGORITMO -->
+                    <div class="mb-3">
+                        <label class="form-label">
+                            Algoritmo de Consenso
+                        </label>
+                        <select name="algoritmoConsenso"
+                                class="form-select">
+                            <option value="NINGUNO">
+                                Ninguno (Modo Irrestricto)
+                            </option>
+                            {{#each algoritmos}}
+                                <option value="{{this}}">
+                                    {{this}}
+                                </option>
+                            {{/each}}
+                        </select>
+                        <div class="form-text">
+                            Si se selecciona un algoritmo, la colección será curada.
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button"
+                            class="btn btn-secondary"
+                            data-bs-dismiss="modal">
+                        Cancelar
+                    </button>
+                    <button type="submit"
+                            class="btn btn-primary">
+                        Guardar Colección
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,33 @@
+@startuml
+' Nodos físicos
+node "Cliente Web\n(Navegador)" {
+    component "Interfaz de Usuario\n(HTML/JS)"
+}
+
+node "Servidor MetaMapa" {
+    component "Servicio Web"
+    component "Servicio Fuente Estática"
+    component "Servicio de Colecciones"
+    component "Servicio de Hechos"
+    component "Servicio de Solicitudes"
+    database "Base de Datos"
+}
+
+node "Almacenamiento externo" {
+    artifact "Archivo CSV"
+}
+
+' Conexiones
+"Interfaz de Usuario" --> "Servicio Web" : HTTP/REST
+"Servicio Web" --> "Servicio de Hechos"
+"Servicio Web" --> "Servicio de Colecciones"
+"Servicio Web" --> "Servicio de Solicitudes"
+
+"Servicio Fuente Estática" --> "Archivo CSV" : Lectura
+"Servicio Fuente Estática" --> "Servicio de Hechos" : Importación
+
+"Servicio de Hechos" --> "Base de Datos"
+"Servicio de Colecciones" --> "Base de Datos"
+"Servicio de Solicitudes" --> "Base de Datos"
+
+@enduml

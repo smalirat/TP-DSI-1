@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Colecciones - MetaMapa</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/templates/static/base.css">
+    <link rel="stylesheet" href="/templates/static/components.css">
+    <link rel="stylesheet" href="/templates/static/pages/colecciones.css">
+</head>
+
+<body style="background: #f8f6f2; min-height: 100vh;">
+    
+    <!-- Include User Navbar -->
+    {{> navbar_user}}
+
+    <!-- Main Content -->
+    <div class="container-fluid py-5">
+        <h1 class="display-5 fw-bold mb-4" style="color: #333;">Nuestras Colecciones</h1>
+        <div class="collections-container">
+            {{#if colecciones}}
+                {{#each colecciones}}
+                    <div class="collection-item">
+                        <div class="d-flex w-100 justify-content-between align-items-center">
+                            <div class="flex-grow-1">
+                                <a href="/colecciones/{{handle}}" class="collection-title">
+                                    {{titulo}}
+                                </a>
+                                <p class="collection-description">{{descripcion}}</p>
+                            </div>
+                        </div>
+                    </div>
+                {{/each}}
+            {{else}}
+                <div class="no-collections">
+                    No hay colecciones para mostrar en este momento.<br><small>¡Pronto habrá contenido interesante aquí!</small>
+                </div>
+            {{/if}}
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <div class="d-flex justify-content-center my-4">
+        <a href="/" class="btn btn-primary btn-lg" style="background-color: #007bff; color: #fff; border: none; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+            Volver al Inicio
+        </a>
+    </div>
+</body>
+</html>

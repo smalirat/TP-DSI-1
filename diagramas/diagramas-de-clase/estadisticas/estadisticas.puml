@@ -1,0 +1,55 @@
+@startuml
+
+abstract class Estadistica {
+  - nombre: String
+  - descripcion: String
+  - resultado: Map<String, Object>
+  - visibilidad: enum { PUBLICA, ADMIN }
+  + exportarCSV(): File
+}
+
+class EstadisticaProvinciaPorColeccion
+class EstadisticaCategoriaGlobal
+class EstadisticaProvinciaPorCategoria
+class EstadisticaHoraPorCategoria
+class EstadisticaSpamSolicitudes
+
+class ServicioEstadisticas {
+  - estadisticas: List<Estadistica>
+  + calcularTodas(): void
+  + obtenerEstadistica(nombre: String): Estadistica
+  + exportarTodasCSV(): List<File>
+}
+
+
+class Nodo {
+  - todasLasFuentes: List<FuenteDatos>
+  - colecciones: List<Coleccion>
+}
+
+
+
+class SolicitudEliminacion
+
+' Herencia
+Estadistica <|-- EstadisticaProvinciaPorColeccion
+Estadistica <|-- EstadisticaCategoriaGlobal
+Estadistica <|-- EstadisticaProvinciaPorCategoria
+Estadistica <|-- EstadisticaHoraPorCategoria
+Estadistica <|-- EstadisticaSpamSolicitudes
+
+' Relaciones principales
+ServicioEstadisticas --> Estadistica
+
+
+
+' Estadísticas acceden directamente al Nodo
+EstadisticaProvinciaPorColeccion --> Nodo
+EstadisticaCategoriaGlobal --> Nodo
+EstadisticaProvinciaPorCategoria --> Nodo
+EstadisticaHoraPorCategoria --> Nodo
+EstadisticaSpamSolicitudes --> Nodo
+EstadisticaSpamSolicitudes --> SolicitudEliminacion
+
+
+@enduml
